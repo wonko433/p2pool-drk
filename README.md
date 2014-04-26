@@ -1,7 +1,7 @@
 Requirements:
 -------------------------
 Generic:
-* Darkdoin
+* Darkcoin
 * Python 
 * Twisted
 * python-argparse (for Python =2.6)
