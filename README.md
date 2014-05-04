@@ -24,7 +24,7 @@ Install module:
 
 
 * git clone https://github.com/chaeplin/SUBSIDY_FUNC.git
-* git clone https://github.com/evan82/xcoin-hash.git
+* git clone https://github.com/darkcoinproject/xcoin-hash.git
 
 * cd SUBSIDY_FUNC/darkcoin-subsidy-python
 * python setup.py install
