@@ -1,2 +1,2 @@
 xcoin-hash is at 
-git clone https://github.com/evan82/xcoin-hash.git
+git clone https://github.com/darkcoinproject/xcoin-hash.git
