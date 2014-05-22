@@ -1,6 +1,12 @@
 https://darkcointalk.org/threads/postponing-masternode-payments-till-may-25th.578/
 
 Do not use p2ool-drk after May 25th.
+
+
+Read https://darkcointalk.org/threads/masternode-payments-attention-pool-operators.764/
+For Masternode payment, use https://bitbucket.org/dstorm/p2pool-drk after May 25th.
+
+This repo will not be updated till June 1.
 -------------------------
 
 
