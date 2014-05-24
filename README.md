@@ -7,7 +7,9 @@
 
 * For Masternode payment, use https://bitbucket.org/dstorm/p2pool-drk after May 25th.
 
-* This repo will not be updated/patched till June 1.
+* This repo will not be updated/patched till ...
+* https://darkcointalk.org/threads/to-p2pool-owner-prepare-hard-fork.808
+
 -------------------------
 
 
