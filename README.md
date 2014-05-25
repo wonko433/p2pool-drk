@@ -1,73 +1,57 @@
-* https://darkcointalk.org/threads/postponing-masternode-payments-till-may-25th.578/
-
-* Do not use p2ool-drk after May 25th.
-
-
-* Read https://darkcointalk.org/threads/masternode-payments-attention-pool-operators.764/
-
-* For Masternode payment, use https://bitbucket.org/dstorm/p2pool-drk after May 25th.
-
-* This repo will not be updated/patched till ...
-* https://darkcointalk.org/threads/to-p2pool-owner-prepare-hard-fork.808
-
--------------------------
-
-
 Requirements:
 -------------------------
 Generic:
-* Darkcoin / 64bit ***
-* Python 
-* Twisted
+
+* Darkcoin >=0.9.4.6
+* Python >=2.6
+* Twisted >=10.0.0
 * python-argparse (for Python =2.6)
 
 Linux:
-* sudo apt-get install python-zope.interface python-twisted python-twisted-web
-* sudo apt-get install python-argparse # if on Python 2.6
 
+    sudo apt-get install python-zope.interface python-twisted python-twisted-web
+    sudo apt-get install python-argparse # if on Python 2.6
 
-Install module:
+Install Python modules:
 -------------------------
+xcoin-hash:
 
-* apt-get install libboost1.48-all-dev python-dev
+    git clone https://github.com/darkcoinproject/xcoin-hash.git
+    cd xcoin-hash
+    rm -rf build
+    python setup.py install
 
+darkcoin-subsidy-python:
 
-* git clone https://github.com/chaeplin/SUBSIDY_FUNC.git
-* git clone https://github.com/darkcoinproject/xcoin-hash.git
+    cd darkcoin-subsidy-python
+    python setup.py install
 
-* cd SUBSIDY_FUNC/darkcoin-subsidy-python
-* python setup.py install
-
-* cd xcoin-hash
-* rm -rf build
-* python setup.py install
-
-
-
-Running Darkcoin P2Pool:
+Running P2Pool:
 -------------------------
 To use P2Pool, you must be running your own local darkcoind. For standard
 configurations, using P2Pool should be as simple as:
 
-     python run_p2pool.py --net darkcoin
-     
-sample run scripts is run_darkpool.sh     
-     
-Then run your miner program, connecting to 127.0.0.1 on port 7903 with any
+    python run_p2pool.py
+
+Then run your miner program, connecting to 127.0.0.1 on port 8998 with any
 username and password.
 
 If you are behind a NAT, you should enable TCP port forwarding on your
-router. Forward port 7903 to the host running P2Pool.
+router. Forward port 8999 to the host running P2Pool.
 
 Run for additional options.
 
     python run_p2pool.py --help
 
-
 Official wiki :
 -------------------------
 https://en.bitcoin.it/wiki/P2Pool
 
+Alternate web front end :
+-------------------------
+* https://github.com/hardcpp/P2PoolExtendedFrontEnd
+* https://github.com/johndoe75/p2pool-node-status
+* https://github.com/justino/p2pool-ui-punchy
 
 Sponsors:
 -------------------------
