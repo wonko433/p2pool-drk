@@ -17,16 +17,17 @@ nets = dict(
         TARGET_LOOKBEHIND=200, # shares  //with that the pools share diff is adjusting faster, important if huge hashing power comes to the pool
         SPREAD=30, # blocks
         NEW_SPREAD=30, # blocks
-        IDENTIFIER='ae3b045d84c4f02a'.decode('hex'),
-        PREFIX='f8850170b96f607c'.decode('hex'),
+        IDENTIFIER='ef05d164bbcd7ed1'.decode('hex'),
+        PREFIX='3966e45ab1ed2db9'.decode('hex'),
         P2P_PORT=8999,
         MIN_TARGET=4,
         MAX_TARGET=2**256//2**20 - 1,
         PERSIST=True,
+        #WORKER_PORT=8998,
         WORKER_PORT=7903,
-        BOOTSTRAP_ADDRS='drk.altmine.net drk2.altmine.net drk3.altmine.net asia01.poolhash.org asia02.poolhash.org q30.qhor.net poulpe.nirnroot.com drk.p2pool.n00bsys0p.co.uk darkcoin.kicks-ass.net darkcoin.fr cryptohasher.net coinminer.net q30.qhor.net p2pool.darkcointalk.org'.split(' '),
+        BOOTSTRAP_ADDRS='drk.altmine.net drk2.altmine.net drk3.altmine.net asia01.poolhash.org asia02.poolhash.org q30.qhor.net poulpe.nirnroot.com drk.p2pool.n00bsys0p.co.uk darkcoin.kicks-ass.net darkcoin.fr cryptohasher.net coinminer.net drk.coinquarry.net drk.kopame.com 54.186.8.140 rebootcamp.de'.split(' '),
         ANNOUNCE_CHANNEL='#p2pool-drk',
-        VERSION_CHECK=lambda v: True,
+        VERSION_CHECK=lambda v: v >= 90411,
     ),
     darkcoin_testnet=math.Object(
         PARENT=networks.nets['darkcoin_testnet'],

@@ -181,7 +181,7 @@ class Share(object):
         if sum(amounts.itervalues()) != worker_payout or any(x < 0 for x in amounts.itervalues()):
             raise ValueError()
         
-        worker_scripts = [k for k in amounts.iterkeys() if k != DONATION_SCRIPT]
+        worker_scripts = sorted([k for k in amounts.iterkeys() if k != DONATION_SCRIPT])
         worker_tx=[dict(value=amounts[script], script=script) for script in worker_scripts if amounts[script]]
         
         donation_tx = [dict(value=amounts[DONATION_SCRIPT], script=DONATION_SCRIPT)]
@@ -378,11 +378,13 @@ class Share(object):
         
         return False, None
     
-    def as_block(self, tracker, known_txs, votes):
+    #def as_block(self, tracker, known_txs, votes):
+    def as_block(self, tracker, known_txs):
         other_txs = self._get_other_txs(tracker, known_txs)
         if other_txs is None:
             return None # not all txs present
-        return dict(header=self.header, txs=[self.check(tracker)] + other_txs, votes=votes)
+        #return dict(header=self.header, txs=[self.check(tracker)] + other_txs, votes=votes)
+        return dict(header=self.header, txs=[self.check(tracker)] + other_txs)
 
 
 class WeightsSkipList(forest.TrackerSkipList):
