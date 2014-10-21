@@ -165,24 +165,10 @@ class Share(object):
         assert total_weight == sum(weights.itervalues()) + donation_weight, (total_weight, sum(weights.itervalues()) + donation_weight)
         
         worker_payout = share_data['subsidy']
-
-        def height_from_coinbase(coinbase):
-            opcode = ord(coinbase[0]) if len(coinbase) > 0 else 0
-            if opcode >= 1 and opcode <= 75: 
-                return pack.IntType(opcode*8).unpack(coinbase[1:opcode+1])
-            if opcode == 76: 
-                return pack.IntType(8).unpack(coinbase[1:2])
-            if opcode == 77: 
-                return pack.IntType(8).unpack(coinbase[1:3])
-            if opcode == 78: 
-                return pack.IntType(8).unpack(coinbase[1:5])
-            if opcode >= 79 and opcode <= 96:
-               return opcode - 80
-            return None
-
+        
         masternode_tx = []
         if share_data['payee'] is not None:
-            masternode_payout = net.PARENT.MNP_FUNC(height, worker_payout)
+            masternode_payout = worker_payout / 5
             worker_payout -= masternode_payout
             payee_script = bitcoin_data.pubkey_hash_to_script2(share_data['payee'])
             masternode_tx = [dict(value=masternode_payout, script=payee_script)]

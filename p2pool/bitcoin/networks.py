@@ -15,35 +15,6 @@ def check_genesis_block(bitcoind, genesis_block_hash):
     else:
         defer.returnValue(True)
 
-def get_mnp(height, value, testnet):
-    ret = value // 5
-
-    if testnet:
-        if (height > 46000):              ret += value // 20 # 25% - 2014-10-07
-        if (height > 46000+((576*30)*1)): ret += value // 20 # 30% - 2014-10-08
-        if (height > 46000+((576*30)*2)): ret += value // 20 # 35% - 2014-10-09
-        if (height > 46000+((576*30)*3)): ret += value // 20 # 40% - 2014-10-10
-        if (height > 46000+((576*30)*4)): ret += value // 20 # 45% - 2014-10-11
-        if (height > 46000+((576*30)*5)): ret += value // 20 # 50% - 2014-10-12
-        if (height > 46000+((576*30)*6)): ret += value // 20 # 55% - 2014-10-13
-        if (height > 46000+((576*30)*7)): ret += value // 20 # 60% - 2014-10-14
-
-    if (height > 158000):               ret += value // 20 # 25.0% - 2014-10-23
-    if (height > 158000+((576*30)* 1)): ret += value // 20 # 30.0% - 2014-11-23
-    if (height > 158000+((576*30)* 2)): ret += value // 20 # 35.0% - 2014-12-23
-    if (height > 158000+((576*30)* 3)): ret += value // 40 # 37.5% - 2015-01-23
-    if (height > 158000+((576*30)* 4)): ret += value // 40 # 40.0% - 2015-02-23
-    if (height > 158000+((576*30)* 5)): ret += value // 40 # 42.5% - 2015-03-23
-    if (height > 158000+((576*30)* 6)): ret += value // 40 # 45.0% - 2015-04-23
-    if (height > 158000+((576*30)* 7)): ret += value // 40 # 47.5% - 2015-05-23
-    if (height > 158000+((576*30)* 9)): ret += value // 40 # 50.0% - 2015-07-23
-    if (height > 158000+((576*30)*11)): ret += value // 40 # 52.5% - 2015-09-23
-    if (height > 158000+((576*30)*13)): ret += value // 40 # 55.0% - 2015-11-23
-    if (height > 158000+((576*30)*15)): ret += value // 40 # 57.5% - 2016-01-23
-    if (height > 158000+((576*30)*17)): ret += value // 40 # 60.0% - 2016-03-23
-
-    return ret
-
 nets = dict(
     darkcoin=math.Object(
         P2P_PREFIX='bf0c6bbd'.decode('hex'),
@@ -54,7 +25,6 @@ nets = dict(
             'darkcoinaddress' in (yield bitcoind.rpc_help()) and
             not (yield bitcoind.rpc_getinfo())['testnet']
         )),
-        MNP_FUNC=lambda height, value: get_mnp(height, value, False),
         SUBSIDY_FUNC=lambda nBits, height: __import__('darkcoin_subsidy').GetBlockBaseValue(nBits, height),
         BLOCKHASH_FUNC=lambda data: pack.IntType(256).unpack(__import__('xcoin_hash').getPoWHash(data)),
         POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('xcoin_hash').getPoWHash(data)),
@@ -77,7 +47,6 @@ nets = dict(
             'darkcoinaddress' in (yield bitcoind.rpc_help()) and
             (yield bitcoind.rpc_getinfo())['testnet']
         )),
-        MNP_FUNC=lambda height, value: get_mnp(height, value, True),
         SUBSIDY_FUNC=lambda nBits, height: __import__('darkcoin_subsidy').GetBlockBaseValue_testnet(nBits, height),
         BLOCKHASH_FUNC=lambda data: pack.IntType(256).unpack(__import__('xcoin_hash').getPoWHash(data)),
         POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('xcoin_hash').getPoWHash(data)),
