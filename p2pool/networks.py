@@ -24,7 +24,7 @@ nets = dict(
         WORKER_PORT=7903,
         BOOTSTRAP_ADDRS='drk.altmine.net'.split(' '),
         ANNOUNCE_CHANNEL='#p2pool-drk',
-        VERSION_CHECK=lambda v: v >= 91314,
+        VERSION_CHECK=lambda v: v >= 101514,
     ),
     darkcoin_testnet=math.Object(
         PARENT=networks.nets['darkcoin_testnet'],
