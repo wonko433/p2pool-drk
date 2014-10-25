@@ -22,7 +22,7 @@ nets = dict(
         MAX_TARGET=2**256//2**20 - 1,
         PERSIST=True,
         WORKER_PORT=7903,
-        BOOTSTRAP_ADDRS='drk.altmine.net'.split(' '),
+        BOOTSTRAP_ADDRS='drk.altmine.net darkcoin.fr p2pool.crunchpool.com x11p2p.com happymining.de ca.p2pool.sk eu.p2pool.sk us.p2pool.sk'.split(' '),
         ANNOUNCE_CHANNEL='#p2pool-drk',
         VERSION_CHECK=lambda v: v >= 101514,
     ),
