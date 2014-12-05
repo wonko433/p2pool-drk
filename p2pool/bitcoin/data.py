@@ -140,6 +140,11 @@ block_type = pack.ComposedType([
     ('votes', pack.ListType(vote_type)),
 ])
 
+block_type_old = pack.ComposedType([
+    ('header', block_header_type),
+    ('txs', pack.ListType(tx_type)),
+])
+
 # merged mining
 
 aux_pow_type = pack.ComposedType([

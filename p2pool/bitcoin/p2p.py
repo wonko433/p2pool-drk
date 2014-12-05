@@ -19,7 +19,7 @@ class Protocol(p2protocol.Protocol):
 
     def connectionMade(self):
         self.send_version(
-            version=70015,
+            version=70051,
             services=1,
             time=int(time.time()),
             addr_to=dict(
@@ -120,14 +120,21 @@ class Protocol(p2protocol.Protocol):
         self.get_block.got_response(block_hash, block)
         self.get_block_header.got_response(block_hash, block['header'])
 
+    message_block_old = pack.ComposedType([
+        ('block', bitcoin_data.block_type_old),
+    ])
+    def handle_block_old(self, block):
+        block_hash = self.net.BLOCKHASH_FUNC(bitcoin_data.block_header_type.pack(block['header']))
+        self.get_block.got_response(block_hash, block)
+        self.get_block_header.got_response(block_hash, block['header'])
+    
     message_headers = pack.ComposedType([
-        ('headers', pack.ListType(bitcoin_data.block_type)),
+        ('headers', pack.ListType(bitcoin_data.block_type_old)),
     ])
     def handle_headers(self, headers):
         for header in headers:
             header = header['header']
-            header_hash = self.net.BLOCKHASH_FUNC(bitcoin_data.block_header_type.pack(header))
-            self.get_block_header.got_response(header_hash, header)
+            self.get_block_header.got_response(self.net.BLOCKHASH_FUNC(bitcoin_data.block_header_type.pack(header)), header)
         self.factory.new_headers.happened([header['header'] for header in headers])
 
     message_ping = pack.ComposedType([
