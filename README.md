@@ -17,14 +17,13 @@ Install Python modules:
 darkcoin_hash:
 
     git clone https://github.com/vertoe/darkcoin_hash.git
-	cd darkcoin_hash
-    rm -rf build
+    cd darkcoin_hash
     python setup.py install
 
 darkcoin_subsidy:
 
     git clone https://github.com/vertoe/darkcoin_subsidy.git
-	cd darkcoin_subsidy
+    cd darkcoin_subsidy
     python setup.py install
 
 Running P2Pool:
