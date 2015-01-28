@@ -5,8 +5,6 @@ from twisted.internet import defer
 
 from . import data
 from p2pool.util import math, pack, jsonrpc
-from operator import *
-
 
 @defer.inlineCallbacks
 def check_genesis_block(bitcoind, genesis_block_hash):
@@ -43,7 +41,7 @@ nets = dict(
     darkcoin_testnet=math.Object(
         P2P_PREFIX='cee2caff'.decode('hex'),
         P2P_PORT=19999,
-        ADDRESS_VERSION=139,
+        ADDRESS_VERSION=111,
         RPC_PORT=19998,
         RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
             'darkcoinaddress' in (yield bitcoind.rpc_help()) and
@@ -55,9 +53,9 @@ nets = dict(
         BLOCK_PERIOD=150, # s
         SYMBOL='tDRK',
         CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'Darkcoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/Darkcoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.darkcoin'), 'darkcoin.conf'),
-        BLOCK_EXPLORER_URL_PREFIX='http://test.explorer.darkcoin.io/block/',
-        ADDRESS_EXPLORER_URL_PREFIX='http://test.explorer.darkcoin.io/address/',
-        TX_EXPLORER_URL_PREFIX='http://test.explorer.darkcoin.io/tx/',
+        BLOCK_EXPLORER_URL_PREFIX='',
+        ADDRESS_EXPLORER_URL_PREFIX='',
+        TX_EXPLORER_URL_PREFIX='',
         SANE_TARGET_RANGE=(2**256//2**32//1000 - 1, 2**256//2**20 - 1),
         DUMB_SCRYPT_DIFF=1,
         DUST_THRESHOLD=0.001e8,
