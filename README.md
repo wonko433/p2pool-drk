@@ -31,13 +31,13 @@ Running P2Pool:
 To use P2Pool, you must be running your own local darkcoind. For standard
 configurations, using P2Pool should be as simple as:
 
-    python run_p2pool.py --net darkcoin
+    python run_p2pool.py
 
 Then run your miner program, connecting to 127.0.0.1 on port 7903 with any
 username and password.
 
 If you are behind a NAT, you should enable TCP port forwarding on your
-router. Forward port 7903 to the host running P2Pool.
+router. Forward port 8999 to the host running P2Pool.
 
 Run for additional options.
 
@@ -60,4 +60,3 @@ Thanks to:
 * The Bitcoin Foundation for its generous support of P2Pool
 * The Litecoin Project for its generous donations to P2Pool
 * The Vertcoin Community for its great contribution to P2Pool
-* chaeplin, dstorm and mr.slaveg from the Darkcoin community
