@@ -60,3 +60,4 @@ Thanks to:
 * The Bitcoin Foundation for its generous support of P2Pool
 * The Litecoin Project for its generous donations to P2Pool
 * The Vertcoin Community for its great contribution to P2Pool
+* chaeplin, dstorm and mr.slaveg from the Darkcoin Community
