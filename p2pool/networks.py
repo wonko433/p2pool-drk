@@ -40,7 +40,7 @@ nets = dict(
         MAX_TARGET=2**256//2**20 - 1,
         PERSIST=False,
         WORKER_PORT=17903,
-        BOOTSTRAP_ADDRS='descartes.darkco.in darkcoin.fr test.p2pool.masternode.io'.split(' '),
+        BOOTSTRAP_ADDRS='turing.darkco.in darkcoin.fr test.p2pool.masternode.io'.split(' '),
         ANNOUNCE_CHANNEL='',
         VERSION_CHECK=lambda v: True,
     ),
