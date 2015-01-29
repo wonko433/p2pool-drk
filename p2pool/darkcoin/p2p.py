@@ -1,5 +1,5 @@
 '''
-Implementation of Bitcoin's p2p protocol
+Implementation of Darkcoin's p2p protocol
 '''
 
 import random
@@ -9,7 +9,7 @@ import time
 from twisted.internet import protocol
 
 import p2pool
-from . import data as bitcoin_data
+from . import data as darkcoin_data
 from p2pool.util import deferral, p2protocol, pack, variable
 
 class Protocol(p2protocol.Protocol):
@@ -41,8 +41,8 @@ class Protocol(p2protocol.Protocol):
         ('version', pack.IntType(32)),
         ('services', pack.IntType(64)),
         ('time', pack.IntType(64)),
-        ('addr_to', bitcoin_data.address_type),
-        ('addr_from', bitcoin_data.address_type),
+        ('addr_to', darkcoin_data.address_type),
+        ('addr_from', darkcoin_data.address_type),
         ('nonce', pack.IntType(64)),
         ('sub_version_num', pack.VarStrType()),
         ('start_height', pack.IntType(32)),
@@ -99,7 +99,7 @@ class Protocol(p2protocol.Protocol):
     message_addr = pack.ComposedType([
         ('addrs', pack.ListType(pack.ComposedType([
             ('timestamp', pack.IntType(32)),
-            ('address', bitcoin_data.address_type),
+            ('address', darkcoin_data.address_type),
         ]))),
     ])
     def handle_addr(self, addrs):
@@ -107,34 +107,34 @@ class Protocol(p2protocol.Protocol):
             pass
 
     message_tx = pack.ComposedType([
-        ('tx', bitcoin_data.tx_type),
+        ('tx', darkcoin_data.tx_type),
     ])
     def handle_tx(self, tx):
         self.factory.new_tx.happened(tx)
 
     message_block = pack.ComposedType([
-        ('block', bitcoin_data.block_type),
+        ('block', darkcoin_data.block_type),
     ])
     def handle_block(self, block):
-        block_hash = self.net.BLOCKHASH_FUNC(bitcoin_data.block_header_type.pack(block['header']))
+        block_hash = self.net.BLOCKHASH_FUNC(darkcoin_data.block_header_type.pack(block['header']))
         self.get_block.got_response(block_hash, block)
         self.get_block_header.got_response(block_hash, block['header'])
 
     message_block_old = pack.ComposedType([
-        ('block', bitcoin_data.block_type_old),
+        ('block', darkcoin_data.block_type_old),
     ])
     def handle_block_old(self, block):
-        block_hash = self.net.BLOCKHASH_FUNC(bitcoin_data.block_header_type.pack(block['header']))
+        block_hash = self.net.BLOCKHASH_FUNC(darkcoin_data.block_header_type.pack(block['header']))
         self.get_block.got_response(block_hash, block)
         self.get_block_header.got_response(block_hash, block['header'])
 
     message_headers = pack.ComposedType([
-        ('headers', pack.ListType(bitcoin_data.block_type_old)),
+        ('headers', pack.ListType(darkcoin_data.block_type_old)),
     ])
     def handle_headers(self, headers):
         for header in headers:
             header = header['header']
-            self.get_block_header.got_response(self.net.BLOCKHASH_FUNC(bitcoin_data.block_header_type.pack(header)), header)
+            self.get_block_header.got_response(self.net.BLOCKHASH_FUNC(darkcoin_data.block_header_type.pack(header)), header)
         self.factory.new_headers.happened([header['header'] for header in headers])
 
     message_ping = pack.ComposedType([
@@ -162,7 +162,7 @@ class Protocol(p2protocol.Protocol):
         if hasattr(self, 'pinger'):
             self.pinger.stop()
         if p2pool.DEBUG:
-            print >>sys.stderr, 'Bitcoin connection lost. Reason:', reason.getErrorMessage()
+            print >>sys.stderr, 'Darkcoin connection lost. Reason:', reason.getErrorMessage()
 
 class ClientFactory(protocol.ReconnectingClientFactory):
     protocol = Protocol

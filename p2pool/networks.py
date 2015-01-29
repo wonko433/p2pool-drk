@@ -1,4 +1,4 @@
-from p2pool.bitcoin import networks
+from p2pool.darkcoin import networks
 from p2pool.util import math
 
 # CHAIN_LENGTH = number of shares back client keeps
