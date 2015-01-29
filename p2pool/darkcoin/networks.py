@@ -7,9 +7,9 @@ from . import data
 from p2pool.util import math, pack, jsonrpc
 
 @defer.inlineCallbacks
-def check_genesis_block(bitcoind, genesis_block_hash):
+def check_genesis_block(darkcoind, genesis_block_hash):
     try:
-        yield bitcoind.rpc_getblock(genesis_block_hash)
+        yield darkcoind.rpc_getblock(genesis_block_hash)
     except jsonrpc.Error_for_code(-5):
         defer.returnValue(False)
     else:
@@ -21,9 +21,9 @@ nets = dict(
         P2P_PORT=9999,
         ADDRESS_VERSION=76,
         RPC_PORT=9998,
-        RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
-            'darkcoinaddress' in (yield bitcoind.rpc_help()) and
-            not (yield bitcoind.rpc_getinfo())['testnet']
+        RPC_CHECK=defer.inlineCallbacks(lambda darkcoind: defer.returnValue(
+            'darkcoinaddress' in (yield darkcoind.rpc_help()) and
+            not (yield darkcoind.rpc_getinfo())['testnet']
         )),
         SUBSIDY_FUNC=lambda nBits, height: __import__('darkcoin_subsidy').GetBlockBaseValue(nBits, height),
         BLOCKHASH_FUNC=lambda data: pack.IntType(256).unpack(__import__('darkcoin_hash').getPoWHash(data)),
@@ -43,9 +43,9 @@ nets = dict(
         P2P_PORT=19999,
         ADDRESS_VERSION=139,
         RPC_PORT=19998,
-        RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
-            'darkcoinaddress' in (yield bitcoind.rpc_help()) and
-            (yield bitcoind.rpc_getinfo())['testnet']
+        RPC_CHECK=defer.inlineCallbacks(lambda darkcoind: defer.returnValue(
+            'darkcoinaddress' in (yield darkcoind.rpc_help()) and
+            (yield darkcoind.rpc_getinfo())['testnet']
         )),
         SUBSIDY_FUNC=lambda nBits, height: __import__('darkcoin_subsidy').GetBlockBaseValue_testnet(nBits, height),
         BLOCKHASH_FUNC=lambda data: pack.IntType(256).unpack(__import__('darkcoin_hash').getPoWHash(data)),
