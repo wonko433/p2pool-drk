@@ -14,7 +14,7 @@ def check(darkcoind, net):
         print >>sys.stderr, "    Check failed! Make sure that you're connected to the right darkcoind with --darkcoind-rpc-port!"
         raise deferral.RetrySilentlyException()
     if not net.VERSION_CHECK((yield darkcoind.rpc_getinfo())['version']):
-        print >>sys.stderr, '    Darkcoin version too old! Upgrade to 0.6.4 or newer!'
+        print >>sys.stderr, '    Darkcoin version too old! Upgrade to 0.11.0.11 or newer!'
         raise deferral.RetrySilentlyException()
 
 @deferral.retry('Error getting work from darkcoind:', 3)
@@ -36,7 +36,7 @@ def getwork(darkcoind, net, use_getblocktemplate=False):
             work = yield go()
             end = time.time()
         except jsonrpc.Error_for_code(-32601): # Method not found
-            print >>sys.stderr, 'Error: Darkcoin version too old! Upgrade to v0.5 or newer!'
+            print >>sys.stderr, 'Error: Darkcoin version too old! Upgrade to v0.11.0.11 or newer!'
             raise deferral.RetrySilentlyException()
     packed_transactions = [(x['data'] if isinstance(x, dict) else x).decode('hex') for x in work['transactions']]
     packed_votes = [(x['data'] if isinstance(x, dict) else x).decode('hex') for x in work['votes']]
