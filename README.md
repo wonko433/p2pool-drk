@@ -9,7 +9,8 @@ Generic:
 
 Linux:
 
-    sudo apt-get install python-zope.interface python-twisted python-twisted-web
+    sudo apt-get install python-zope.interface python-twisted python-twisted-web python-dev
+    sudo apt-get install gcc g++
     sudo apt-get install python-argparse # if on Python 2.6
 
 Install Python modules:
