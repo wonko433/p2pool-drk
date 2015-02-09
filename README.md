@@ -2,7 +2,7 @@ Requirements:
 -------------------------
 Generic:
 
-* Darkcoin >=0.11.0.11
+* Darkcoin >=0.11.1.17
 * Python >=2.6
 * Twisted >=10.0.0
 * python-argparse (for Python =2.6)
