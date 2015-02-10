@@ -24,7 +24,7 @@ nets = dict(
         WORKER_PORT=7903,
         BOOTSTRAP_ADDRS='drk.altmine.net darkcoin.fr p2pool.crunchpool.com x11p2p.com happymining.de ca.p2pool.sk eu.p2pool.sk us.p2pool.sk'.split(' '),
         ANNOUNCE_CHANNEL='#p2pool-drk',
-        VERSION_CHECK=lambda v: v >= 110011,
+        VERSION_CHECK=lambda v: v >= 110119,
     ),
     darkcoin_testnet=math.Object(
         PARENT=networks.nets['darkcoin_testnet'],

@@ -2,16 +2,15 @@ Requirements:
 -------------------------
 Generic:
 
-* Darkcoin >=0.11.0.11
-* Python >=2.6
-* Twisted >=10.0.0
-* python-argparse (for Python =2.6)
+* Darkcoin >=0.11.1.19
+* Python >=2.7
+* Twisted >=13.0.0
+* Zope.interface >=3.8.0
 
 Linux:
 
     sudo apt-get install python-zope.interface python-twisted python-twisted-web python-dev
     sudo apt-get install gcc g++
-    sudo apt-get install python-argparse # if on Python 2.6
 
 Install Python modules:
 -------------------------
