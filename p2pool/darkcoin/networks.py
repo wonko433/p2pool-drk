@@ -18,9 +18,9 @@ def check_genesis_block(darkcoind, genesis_block_hash):
 nets = dict(
     darkcoin=math.Object(
         P2P_PREFIX='bf0c6bbd'.decode('hex'),
-        P2P_PORT=9999,
+        P2P_PORT=8888,
         ADDRESS_VERSION=76,
-        RPC_PORT=9998,
+        RPC_PORT=8887,
         RPC_CHECK=defer.inlineCallbacks(lambda darkcoind: defer.returnValue(
             'darkcoinaddress' in (yield darkcoind.rpc_help()) and
             not (yield darkcoind.rpc_getinfo())['testnet']
@@ -40,9 +40,9 @@ nets = dict(
     ),
     darkcoin_testnet=math.Object(
         P2P_PREFIX='cee2caff'.decode('hex'),
-        P2P_PORT=19999,
+        P2P_PORT=18888,
         ADDRESS_VERSION=139,
-        RPC_PORT=19998,
+        RPC_PORT=18887,
         RPC_CHECK=defer.inlineCallbacks(lambda darkcoind: defer.returnValue(
             'darkcoinaddress' in (yield darkcoind.rpc_help()) and
             (yield darkcoind.rpc_getinfo())['testnet']
